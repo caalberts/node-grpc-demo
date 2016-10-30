@@ -1,18 +1,28 @@
 const path = require('path')
 const grpc = require('grpc')
-const proto = grpc.load(path.resolve(__dirname + '/../proto/greeter.proto'))
-const greeter = proto.greeter
+const greeter = grpc.load(path.resolve(__dirname + '/../proto/greeter.proto')).greeter
 
-function greet(call, callback) {
-  callback(null, {message: `Hello ${call.request.name}`})
+const PORT = 3000
+
+class Server {
+  constructor(port) {
+    this.server = new grpc.Server()
+    this.handlers = {
+      greet: this.greet
+    }
+    this.port = port
+  }
+
+  greet(call, callback) {
+    callback(null, {message: `Hello ${call.request.name}`})
+  }
+
+  start() {
+    this.server.addProtoService(greeter.Greeter.service, this.handlers)
+    this.server.bind(`0.0.0.0:${this.port}`, grpc.ServerCredentials.createInsecure())
+    console.log(`GRPC server running on localhost:${this.port}`);
+    this.server.start()
+  }
 }
 
-function main() {
-  const server = new grpc.Server()
-  server.addProtoService(greeter.Greeter.service, {greet: greet})
-  server.bind('0.0.0.0:3000', grpc.ServerCredentials.createInsecure())
-  console.log('GRPC server running on localhost:3000');
-  server.start()
-}
-
-main()
+new Server(PORT).start()
