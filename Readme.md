@@ -6,6 +6,11 @@
 
 ## Start servers
 
-There are 2 servers in this project.
+There are 2 servers in this project:
+
 1. `npm start-server` to start GRPC server running on http://localhost:3000
-2. `npm start-client` to start express server with GRPC client with front end running on http://localhost:4000
+2. `npm start-client` to start express server with GRPC client with front end running on http://localhost:4000 -- TODO
+
+## Generating protobuf
+
+This demo uses dynamically generated protobuf at runtime, so `protoc` is not needed.
