@@ -1,0 +1,19 @@
+{
+  "name": "node-grpc",
+  "version": "1.0.0",
+  "description": "Demo project to use gRPC in node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "grpc"
+  ],
+  "author": "Albert Salim <albertlimca@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "google-protobuf": "^3.1.1",
+    "grpc": "^1.0.1"
+  }
+}
