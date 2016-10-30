@@ -4,7 +4,7 @@ const greeter = grpc.load(path.resolve(__dirname + '/../proto/greeter.proto')).g
 
 const PORT = 3000
 
-class Server {
+class GreetingServer {
   constructor(port) {
     this.server = new grpc.Server()
     this.handlers = {
@@ -25,4 +25,4 @@ class Server {
   }
 }
 
-new Server(PORT).start()
+new GreetingServer(PORT).start()

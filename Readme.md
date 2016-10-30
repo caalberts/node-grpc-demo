@@ -4,12 +4,12 @@
 
 1. `npm install`
 
-## Start servers
+## Run demo
 
-There are 2 servers in this project:
+Run the following in separate shells:
 
 1. `npm start-server` to start GRPC server running on http://localhost:3000
-2. `npm start-client` to start express server with GRPC client with front end running on http://localhost:4000 -- TODO
+2. `node grpc-client/client.js <NAME>` to call grpc server with optional <NAME>
 
 ## Generating protobuf
 

@@ -16,5 +16,5 @@ message Name {
 }
 
 message Greeting {
-  string greeting = 1;
+  string message = 1;
 }
