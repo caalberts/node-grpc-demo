@@ -1,8 +1,7 @@
 const path = require('path')
 const grpc = require('grpc')
 const greeter = grpc.load(path.resolve(__dirname + '/../proto/greeter.proto')).greeter
-
-const PORT = 3000
+const config = require('../config')
 
 class GreetingServer {
   constructor(port) {
@@ -25,4 +24,4 @@ class GreetingServer {
   }
 }
 
-new GreetingServer(PORT).start()
+new GreetingServer(config.grpcServerPort).start()
