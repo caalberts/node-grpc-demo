@@ -13,7 +13,8 @@ app.use((req, res, next) => {
 })
 
 app.get('/call-grpc', (req, res) => {
-  client.call('message', (err, response) => {
+  console.log(req.query);
+  client.call(req.query.name, (err, response) => {
     if (err) console.log(err)
     res.status(200).json(response)
   })

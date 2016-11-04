@@ -1,9 +1,14 @@
 class App {
   callGrpc() {
-    window.fetch('http://localhost:8080/call-grpc')
+    name = document.querySelector('#name').value
+    window.fetch(`http://localhost:8080/call-grpc?name=${name}`)
       .then(res => res.json())
-      .then(response => console.log(response))
+      .then(response => this.showResponse(response.message))
       .catch(console.log)
+  }
+
+  showResponse(message) {
+    document.querySelector('#response').value = message
   }
 }
 
