@@ -4,8 +4,6 @@
   "description": "Demo project to use gRPC in node",
   "main": "index.js",
   "scripts": {
-    "start-server": "node grpc-server/server.js",
-    "start-client": "node demo-server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
