@@ -1,5 +1,5 @@
 const express = require('express')
-const GrpcClient = require('./grpc-client')
+const GrpcClient = require('../grpc/client')
 const config = require('../config')
 
 const app = express()

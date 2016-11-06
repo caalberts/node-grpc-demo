@@ -1,6 +1,6 @@
 const path = require('path')
 const grpc = require('grpc')
-const greeter = grpc.load(path.resolve(__dirname + '/../proto/greeter.proto')).greeter
+const greeter = grpc.load(path.resolve(__dirname + '/greeter.proto')).greeter
 
 class GreetingClient {
   constructor(port) {
