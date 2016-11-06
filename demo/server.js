@@ -12,6 +12,8 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use(express.static(`${__dirname}/public`))
+
 app.get('/call-grpc', (req, res) => {
   console.log(req.query);
   client.call(req.query.name, (err, response) => {

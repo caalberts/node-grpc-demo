@@ -9,8 +9,7 @@
 Run the following in separate shells:
 
 1. `node grpc-server/server.js` to start GRPC server running on http://localhost:3000
-2. `node demo-server/server.js` to start demo server on http://localhost:8080
-3. `http-server demo-app` to server static demo app on http://localhost:8081
+2. `node demo/server.js` to start demo server on http://localhost:8080
 
 ## Generating protobuf
 
