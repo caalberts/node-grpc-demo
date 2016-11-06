@@ -8,7 +8,7 @@ class GreetingClient {
     this.client = new greeter.Greeter(`localhost:${port}`, grpc.credentials.createInsecure())
   }
 
-  call(name, callback) {
+  greet(name, callback) {
     return this.client.greet({name: name}, (err, res) => {
       if (err) {
         console.log(err)

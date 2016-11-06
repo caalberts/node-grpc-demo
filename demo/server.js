@@ -16,7 +16,7 @@ app.use(express.static(`${__dirname}/public`))
 
 app.get('/call-grpc', (req, res) => {
   console.log(req.query);
-  client.call(req.query.name, (err, response) => {
+  client.greet(req.query.name, (err, response) => {
     if (err) console.log(err)
     res.status(200).json(response)
   })

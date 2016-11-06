@@ -12,7 +12,7 @@ suite
     defer: 'true',
     fn: function(deferred) {
       grpcClient
-        .call('John', (err, res) => {
+        .greet('John', (err, res) => {
           deferred.resolve()
         })
     }
