@@ -10,31 +10,71 @@ const suite = new Benchmark.Suite
 suite
   .add('GRPC#greet', {
     defer: 'true',
-    fn: function(deferred) {
-      grpcClient
-        .greet('John', (err, res) => {
-          deferred.resolve()
-        })
-    }
+    fn: grpcGreet
   })
-  .add('REST#greet', {
+  .add('GET#greet', {
     defer: 'true',
-    fn: function(deferred) {
-      http
-        .get(`http://localhost:${config.restServerPort}/greet?name=John`, (res) => {
-          rawData = ''
-          res.on('data', (chunk) => rawData += chunk)
-          res.on('end', () => {})
-          deferred.resolve()
-        })
-        .on('error', console.log)
-    }
+    fn: restGreet
   })
-  .on('cycle', e => {
-    console.log(String(e.target))
+  .add('GRPC#greetWithName', {
+    defer: 'true',
+    fn: grpcGreetWithName
   })
-  .on('complete', function () {
-    console.log('completed benchmark')
-    console.log(`Fastest is ${this.filter('fastest').map('name')}`)
+  .add('POST#greetWithName', {
+    defer: 'true',
+    fn: postGreetWithName
   })
+  .on('cycle', e => console.log(String(e.target)))
+  .on('complete', () => console.log('completed benchmark'))
   .run()
+
+function grpcGreet(deferred) {
+  grpcClient
+    .greet((err, res) => {
+      deferred.resolve()
+    })
+}
+
+function restGreet(deferred) {
+  http
+    .get(`http://localhost:${config.restServerPort}/greet`, (res) => {
+      rawData = ''
+      res.on('data', (chunk) => rawData += chunk)
+      res.on('end', () => {
+        deferred.resolve()
+      })
+    })
+    .on('error', console.log)
+}
+
+function grpcGreetWithName(deferred) {
+  grpcClient
+    .greetWithName('Albert', (err, res) => {
+      deferred.resolve()
+    })
+}
+
+function postGreetWithName(deferred) {
+  const postData = JSON.stringify({'name': 'Albert'})
+  const opts = {
+    hostname: 'localhost',
+    port: config.restServerPort,
+    path: '/greetWithName',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(postData)
+    }
+  }
+
+  const req = http.request(opts, (res) => {
+    rawData = ''
+    res.on('data', (chunk) => rawData += chunk)
+    res.on('end', () => {
+      deferred.resolve()
+    })
+  })
+  req.on('error', console.log)
+  req.write(postData)
+  req.end()
+}

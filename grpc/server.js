@@ -7,13 +7,18 @@ class GreetingServer {
   constructor(port) {
     this.server = new grpc.Server()
     this.handlers = {
-      greet: this.greet
+      greet: this.greet,
+      greetWithName: this.greetWithName
     }
     this.port = port
   }
 
   greet(call, callback) {
-    callback(null, {message: `Hello ${call.request.name}`})
+    callback(null, {message: 'Hello world!'})
+  }
+
+  greetWithName(call, callback) {
+    callback(null, {message: `Hello ${call.request.name}!`})
   }
 
   start() {

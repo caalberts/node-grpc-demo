@@ -3,7 +3,11 @@ syntax = "proto3";
 package greeter;
 
 service Greeter {
-  rpc greet(Name) returns (Greeting) {}
+  rpc greet(NullRequest) returns (Greeting) {}
+  rpc greetWithName(Name) returns (Greeting) {}
+}
+
+message NullRequest {
 }
 
 message Name {
